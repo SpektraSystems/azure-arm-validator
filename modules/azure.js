@@ -110,9 +110,16 @@ exports.testTemplate = function (rgName, templateFile, parametersFile) {
       var cmd = {
         command: 'group deployment create',
         'resource-group': rgName,
-        'template-file': templateFile,
-        'parameters': parametersFile
+        'template-file': templateFile
       };
+
+      var parametersFileContent = JSON.parse(fs.readFileSync(parametersFile));
+      for (var key in parametersFileContent.parameters) 
+      {
+        cmd['parameters'] = parametersFile;
+        break;
+      }
+    
       // now deploy!
       return invoke.call(scripty, cmd);
     });
@@ -150,6 +157,13 @@ exports.testTemplateWithPreReq = function (rgName, templateFile, parametersFile,
         'resource-group': rgName,
         'template-file': preReqTemplateFile
       };
+
+      var preReqParamContent = JSON.parse(fs.readFileSync(preReqParametersFile));
+      for (var key in preReqParamContent.parameters) {
+        cmd['parameters'] = preReqParametersFile;
+        break;
+      }
+
       // now deploy!
       return invoke.call(scripty, cmd);
     })
@@ -179,9 +193,16 @@ exports.testTemplateWithPreReq = function (rgName, templateFile, parametersFile,
       var cmd = {
         command: 'group deployment create',
         'resource-group': rgName,
-        'template-file': templateFile,
-        'parameters': parametersFile
+        'template-file': templateFile
       };
+
+      var parametersFileContent = JSON.parse(fs.readFileSync(parametersFile));
+      for (var key in parametersFileContent.parameters) 
+      {
+        cmd['parameters'] = parametersFile;
+        break;
+      }
+
       // now deploy!
       return invoke.call(scripty, cmd);
     });
